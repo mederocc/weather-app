@@ -1,0 +1,6 @@
+.forecast-container {
+  display: flex;
+  flex-direction: column;
+  border: 3px solid purple;
+  align-items: flex-start;
+}

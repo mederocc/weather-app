@@ -1,0 +1,18 @@
+.app-container {
+  border: solid green 3px;
+  display: "flex";
+  flex-direction: "column";
+}
+
+.header {
+  border: solid blue 3px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 3rem;
+}
+
+.search-bar {
+  width: 30%;
+}

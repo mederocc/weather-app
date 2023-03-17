@@ -1,0 +1,7 @@
+.day-container {
+  display: flex;
+  border: solid 3px blue;
+  width: 100%;
+  justify-content: space-between;
+  padding: 1rem;
+}
