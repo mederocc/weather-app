@@ -17,8 +17,13 @@
 .current-container > p {
   font-weight: bold;
   font-size: x-large;
+  margin-bottom: 2rem;
 }
 
 .current-temp {
   margin-left: 3rem;
+}
+
+.current-temp > p {
+  white-space: nowrap;
 }

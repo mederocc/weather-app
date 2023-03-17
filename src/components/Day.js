@@ -7,7 +7,7 @@ import { weatherIcons } from "../utils/weatherCodes";
 
 const Day = ({ day, max, min, weatherCode, weather }) => {
   const faIconKey = handleFaIcon(weather, weatherCode);
-  console.log(weather);
+  // console.log(weather);
 
   return (
     <div className={classes["day-container"]}>

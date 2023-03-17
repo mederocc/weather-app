@@ -1,14 +1,14 @@
 import { useState, useEffect, useCallback } from "react";
 import classes from "./App.module.css";
-import TextField from "@mui/material/TextField";
 import WeatherCard from "./components/WeatherCard";
+import TransitionWrapper from "./components/UI/TransitionWrapper";
+import SearchBar from "./components/UI/SearchBar";
 
 function App() {
   const [weather, setWeather] = useState(null);
-  const [location, setLocation] = useState(null);
-
-  // PLACE TO COORDS
-  //https://api.openweathermap.org/geo/1.0/direct?q=buenos%20aires&limit=1&appid=ced421fdfdce066f5456cd1ffef46304
+  const [location, setLocation] = useState(null); // Name from coords
+  const [coords, setCoords] = useState(null); // Coords from name
+  const [posError, setPosError] = useState(false);
 
   // GET TIMEZONE
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -17,6 +17,8 @@ function App() {
 
   const handleWeather = useCallback(
     async (position) => {
+      if (!position) return;
+
       const response = await fetch(
         `https://api.open-meteo.com/v1/forecast?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}&hourly=temperature_2m,weathercode&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset,weathercode&current_weather=true&timezone=${timeZone}`
       );
@@ -33,27 +35,68 @@ function App() {
   );
 
   useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(handleWeather);
-    } else {
-      console.log("Geolocation is not supported by this browser.");
+    try {
+      if (navigator.geolocation && !coords) {
+        navigator.geolocation.getCurrentPosition(handleWeather);
+      }
+    } catch (error) {
+      setPosError(true);
     }
-  }, [handleWeather]);
+  }, [handleWeather, coords]);
+
+  const handleLocation = async (location) => {
+    let response = await fetch(
+      `https://api.openweathermap.org/geo/1.0/direct?q=${location.replace(
+        " ",
+        "%20"
+      )}&limit=1&appid=ced421fdfdce066f5456cd1ffef46304`
+    );
+    response = await response.json();
+    // formatting this way so I can reuse handleWeather as is.
+
+    console.log(response);
+    setCoords({
+      coords: { latitude: response[0].lat, longitude: response[0].lon },
+    });
+  };
+
+  useEffect(() => {
+    handleWeather(coords);
+  }, [coords, handleWeather]);
 
   return (
     <div className={classes["app-container"]}>
       <div className={classes.header}>
         <h1>WEATHER APP</h1>
-        <TextField
-          id="standard-search"
-          label="Search field"
-          type="search"
-          variant="standard"
-          className={classes["search-bar"]}
-        />
+        <SearchBar handleLocation={handleLocation} />
       </div>
       {weather && location && (
-        <WeatherCard weather={weather} location={location.address.city} />
+        <TransitionWrapper>
+          <WeatherCard weather={weather} location={location.address.city} />
+        </TransitionWrapper>
+      )}
+      {!weather || !location ? (
+        <TransitionWrapper>
+          <div className={classes.loading}>
+            <img
+              src="https://i.pinimg.com/originals/0e/f3/bb/0ef3bb66d9216fffcea9022628f7bb26.gif"
+              alt="loading"
+            />
+          </div>
+        </TransitionWrapper>
+      ) : (
+        ""
+      )}
+
+      {posError && !location && (
+        <TransitionWrapper>
+          <div className={classes.loading}>
+            <img
+              src="https://i.pinimg.com/originals/0e/f3/bb/0ef3bb66d9216fffcea9022628f7bb26.gif"
+              alt="loading"
+            />
+          </div>
+        </TransitionWrapper>
       )}
     </div>
   );
