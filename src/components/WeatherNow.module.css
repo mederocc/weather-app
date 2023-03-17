@@ -1,0 +1,24 @@
+.current-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  padding: 2rem;
+  font-size: large;
+}
+
+.current-container > div {
+  display: flex;
+  border: red solid 3px;
+  padding: 2rem;
+  align-items: center;
+}
+
+.current-container > p {
+  font-weight: bold;
+  font-size: x-large;
+}
+
+.current-temp {
+  margin-left: 3rem;
+}

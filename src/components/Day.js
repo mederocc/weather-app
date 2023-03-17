@@ -7,16 +7,17 @@ import { weatherIcons } from "../utils/weatherCodes";
 
 const Day = ({ day, max, min, weatherCode, weather }) => {
   const faIconKey = handleFaIcon(weather, weatherCode);
+  console.log(weather);
 
   return (
     <div className={classes["day-container"]}>
-      <p>{day.slice(0, 3)}</p>
+      <div>{day.slice(0, 3)}</div>
       <div style={{ fontSize: "1.6rem", color: "blue" }}>
         <FontAwesomeIcon icon={icons[weatherIcons[faIconKey]]} />
       </div>
-      <p>{max}ºC</p>
-      <p>bar</p>
-      <p>{min}ºC</p>
+      <div>{min}ºC</div>
+      <div>{max}ºC</div>
+      {/* <div>bar</div> */}
     </div>
   );
 };

@@ -1,30 +1,19 @@
 import React from "react";
-import CenteredBox from "./UI/CenteredBox";
+import classes from "./WeatherNow.module.css";
 
 const WeatherNow = ({ weather, location, weatherCodes, children }) => {
   const description = weatherCodes[weather.current_weather.weathercode];
   return (
-    <CenteredBox>
+    <div className={classes["current-container"]}>
       <p>{location}</p>
-      <CenteredBox direction={"row"}>
+      <div>
         {children}
-        <CenteredBox>
+        <div className={classes["current-temp"]}>
           <p>{weather.current_weather.temperature} ºC</p>
           <p>{description}</p>
-        </CenteredBox>
-      </CenteredBox>
-
-      {/* <CenteredBox direction={"row"}>
-        <CenteredBox>
-          <div>Lowest temperature:</div>
-          <div>{weather.daily.temperature_2m_min[0]} ºC</div>
-        </CenteredBox>
-        <CenteredBox>
-          <div>Highest temperature:</div>
-          <div>{weather.daily.temperature_2m_max[0]} ºC</div>
-        </CenteredBox>
-      </CenteredBox> */}
-    </CenteredBox>
+        </div>
+      </div>
+    </div>
   );
 };
 

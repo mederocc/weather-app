@@ -8,6 +8,7 @@ export default function CenteredBox(props) {
       justifyContent="center"
       alignItems="center"
       height="100%"
+      border="solid green 3px"
     >
       {props.children}
     </Box>

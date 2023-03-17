@@ -20,6 +20,7 @@ const Forecast = ({ weather }) => {
     date.setDate(date.getDate() + 1);
 
     days.push({
+      key: Math.random().toString(36).substring(2),
       day: daysOfWeek[date.getDay()],
       max: weather.daily.temperature_2m_max[i],
       min: weather.daily.temperature_2m_min[i],
@@ -30,7 +31,7 @@ const Forecast = ({ weather }) => {
 
   return (
     <div className={classes["forecast-container"]}>
-      <h2>7-day forecast</h2>
+      <p>7-day forecast</p>
 
       {days.map((day) => (
         <Day {...day} />
