@@ -16,21 +16,25 @@ const SearchBar = ({ handleLocation }) => {
 
   return (
     <TextField
+      id="filled-search"
+      type="search"
+      variant="filled"
       onChange={(e) => {
         setInput(e.target.value);
       }}
       value={input}
       onKeyDown={handleEnter}
-      id="standard-search"
-      label=" Try a different location"
-      type="search"
-      variant="standard"
+      label="Try a different location"
       style={{
-        width: "30%",
+        "::placeholder": {
+          padding: "1rem",
+        },
+        width: "20rem",
+        marginTop: "1.5rem",
+        // opacity: "70%",
         backgroundColor: "rgb(249, 249, 249)",
         borderRadius: "0.2rem",
         overflow: "hidden",
-        marginRop: "3rem",
       }}
     />
   );

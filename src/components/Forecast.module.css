@@ -4,10 +4,22 @@
   border: 3px solid purple;
   align-items: center;
   padding: 3rem;
-  margin-top: 2rem;
+  margin: 3rem;
+  margin-left: 0;
+  margin-right: 0;
+  border-radius: 2rem;
 }
 
 .forecast-container > p {
   font-weight: bold;
   font-size: x-large;
+}
+
+hr {
+  border: 0;
+  clear: both;
+  display: block;
+  width: 96%;
+  background-color: gray;
+  height: 1px;
 }

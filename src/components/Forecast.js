@@ -33,8 +33,11 @@ const Forecast = ({ weather }) => {
     <div className={classes["forecast-container"]}>
       <p>7-day forecast</p>
 
-      {days.map((day) => (
-        <Day {...day} />
+      {days.map((day, index) => (
+        <>
+          <Day {...day} />
+          {index < days.length - 1 && <hr />}
+        </>
       ))}
     </div>
   );

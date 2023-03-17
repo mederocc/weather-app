@@ -16,8 +16,11 @@ function App() {
   // GET LOCATION
 
   const handleWeather = useCallback(
+    // It takes coordinates given by browser on mount. It can then take coords received from api on search.
     async (position) => {
       if (!position) return;
+      //9.8694792
+      // -83.7980749
 
       const response = await fetch(
         `https://api.open-meteo.com/v1/forecast?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}&hourly=temperature_2m,weathercode&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset,weathercode&current_weather=true&timezone=${timeZone}`
@@ -54,7 +57,6 @@ function App() {
     response = await response.json();
     // formatting this way so I can reuse handleWeather as is.
 
-    console.log(response);
     setCoords({
       coords: { latitude: response[0].lat, longitude: response[0].lon },
     });
@@ -66,10 +68,15 @@ function App() {
 
   return (
     <div className={classes["app-container"]}>
-      <div className={classes.header}>
-        <h1>WEATHER APP</h1>
-        <SearchBar handleLocation={handleLocation} />
-      </div>
+      {weather && location ? (
+        <div className={classes.header}>
+          <h1>WEATHER APP</h1>
+          <SearchBar handleLocation={handleLocation} />
+        </div>
+      ) : (
+        ""
+      )}
+
       {weather && location && (
         <TransitionWrapper>
           <WeatherCard weather={weather} location={location.address.city} />

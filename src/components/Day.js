@@ -10,15 +10,17 @@ const Day = ({ day, max, min, weatherCode, weather }) => {
   // console.log(weather);
 
   return (
-    <div className={classes["day-container"]}>
-      <div>{day.slice(0, 3)}</div>
-      <div style={{ fontSize: "1.6rem", color: "blue" }}>
-        <FontAwesomeIcon icon={icons[weatherIcons[faIconKey]]} />
+    <>
+      <div className={classes["day-container"]}>
+        <p>{day.slice(0, 3)}</p>
+        <div style={{ fontSize: "3rem", color: "white", opacity: "70%" }}>
+          <FontAwesomeIcon icon={icons[weatherIcons[faIconKey]]} />
+        </div>
+        <p>{min}ºC</p>
+        <p>{max}ºC</p>
+        {/* <div>bar</div> */}
       </div>
-      <div>{min}ºC</div>
-      <div>{max}ºC</div>
-      {/* <div>bar</div> */}
-    </div>
+    </>
   );
 };
 

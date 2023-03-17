@@ -2,22 +2,27 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 50%;
-  padding: 2rem;
   font-size: large;
+  border: 3px solid blue;
+  border-radius: 2rem;
+  padding-top: 1.5rem;
 }
 
 .current-container > div {
   display: flex;
   border: red solid 3px;
-  padding: 2rem;
   align-items: center;
+  border-radius: 1rem;
+  padding: 4rem;
+  margin: 4rem;
+  margin-top: 0;
 }
 
 .current-container > p {
   font-weight: bold;
-  font-size: x-large;
+  font-size: 2rem;
   margin-bottom: 2rem;
+  white-space: nowrap;
 }
 
 .current-temp {

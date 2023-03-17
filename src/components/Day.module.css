@@ -1,15 +1,23 @@
 .day-container {
   display: flex;
-  border: solid 3px blue;
   width: 100%;
   justify-content: space-between;
   padding: 1rem;
   margin-top: 1rem;
 }
 
-.day-container > div {
+.day-container > div,
+p {
   display: flex;
   justify-content: center;
   /* border: solid 3px green; */
   width: 10vw;
+  align-items: center;
+  padding: 1rem;
+  font-weight: bold;
+}
+
+.day-container {
+  font-weight: bold;
+  font-size: 1.2rem;
 }
